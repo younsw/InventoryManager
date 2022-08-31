@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#wrap {
+	width:1200px;
+	justify-content: center;
+}
+
+.header {
+	height:70px;
+}
+
+.nav {
+	color: #000000;
+}
+
+.section {
+	height: 700px;
+}
+
+.signup {
+	height:400px;
+}
