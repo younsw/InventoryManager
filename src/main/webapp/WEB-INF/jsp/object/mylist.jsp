@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,10 +46,10 @@
 						<c:forEach var="object" items="${objectList }">
 							<tr>
 								<td>${object.id }</td>
-								<td>${object.name }</td>
+								<td><a href="#" id="objectDetail">${object.name }</a></td>
 								<td>${object.classification }</td>
-								<td>${object.price }₩</td>
-								<td>${object.createdAt }</td>
+								<td><fmt:formatNumber value="${object.price}" pattern="#,###,###,###,###₩"/></td>
+								<td><fmt:formatDate value="${object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
 								<td><button class="btn btn-success">추가</button></td>
 								<td><button class="btn btn-danger">삭제</button></td>
 							</tr>
@@ -71,6 +72,18 @@
 			
 	
 	</div>
+	
+	<script>
+		
+		$(document).ready(function() {
+			
+			$("#objectDetail").on("click", function() {
+				alert();
+			});
+			
+		});
+	
+	</script>
 	
 
 </body>
