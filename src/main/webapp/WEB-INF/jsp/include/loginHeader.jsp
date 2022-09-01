@@ -6,9 +6,10 @@
 			</div>
 			<nav class="col-5">
 				<div class="mt-3 d-flex justify-content-around">
-					<a href="#" class="nav-link main-link nav">내 물건</a>
+					<a href="/object/mylist/view" class="nav-link main-link nav">내 물건</a>
 					<a href="#" class="nav-link main-link nav">다른 물건 둘러보기</a>
 					<a href="#" class="nav-link main-link nav">즐겨찾기</a>
+					<a href="/object/registration/view" class="nav-link main-link nav">등록 하기</a>
 				</div>
 			</nav>
 			<div class="col-3">

@@ -46,7 +46,7 @@
 	
 	<script>
 		
-		$(documnt).ready(function() {
+		$(document).ready(function() {
 			
 			$("#signinInput").on("click", function() {
 				var loginId = $("#loginIdInput").val();

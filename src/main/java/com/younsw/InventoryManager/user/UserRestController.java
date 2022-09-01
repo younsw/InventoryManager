@@ -3,6 +3,9 @@ package com.younsw.InventoryManager.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +61,7 @@ public class UserRestController {
 	public Map<String, String> signin(
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
+			, HttpServletRequest request
 			) {
 		
 		User user = userBO.signin(loginId, password);
@@ -66,6 +70,10 @@ public class UserRestController {
 		
 		if(user != null) {
 			result.put("result", "success");
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userName", user.getName());
+			session.setAttribute("userLoginId", user.getLoginId());
 		} else {
 			result.put("result", "false");
 		}
