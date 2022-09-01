@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 		<header class="d-flex header">
 			<div class="text-weight-bolder col-4 d-flex justify-content-center">
 				<h2 class="mt-3">Inventory Manager</h2>
@@ -14,8 +15,12 @@
 			</nav>
 			<div class="col-3">
 				<div class="mt-4 d-flex justify-content-center">
-					연상원
-					<a href="#">로그아웃</a>
+					<c:if test="${not empty userId }">
+				 		<div class="mr-3">${userName }님<a href="/user/signout">로그아웃</a> </div>
+				 	</c:if>
+				 	<c:if test="${empty userId }">
+						<div class="mr-3"><a href="/user/signin/view">로그인</a></div>
+					</c:if>
 				</div>
 			</div>
 		</header>

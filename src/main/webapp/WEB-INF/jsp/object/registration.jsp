@@ -25,6 +25,10 @@
 		<c:import url="/WEB-INF/jsp/include/loginHeader.jsp" />
 		
 		<section class="d-flex justify-content-center">
+			<div class="col-4  ">
+				<h2 class="text-center">사진 미리보기</h2>
+				<img class="form-control" id="View" src="" />
+			</div>
 			<div class="col-5 align-self-center ">
 				<div class="text-center">
 					<h3>등록</h3>	
@@ -41,7 +45,7 @@
 					<div class="d-flex justify-content-between">
 						<div class="btn my-1">
 		  					<a href="#" id="imageIcon"> <i class="bi bi-image"></i> </a> 
-							<input type="file" id="fileInput" class="d-none">
+							<input type="file" id="imagePath" class="d-none">
 						</div>
 						<button class="btn btn-success form-control" id="objectRegistration">등록</button><br>
 					</div>
@@ -56,10 +60,26 @@
 		
 		$(document).ready(function() {
 			
+			$(function() {
+			    $("#imagePath").on('change', function(){
+			    readURL(this);
+				});
+			});
+			
+			function readURL(input) {
+			    if (input.files && input.files[0]) {
+			        var reader = new FileReader();
+			        reader.onload = function (e) {
+			        $('#View').attr('src', e.target.result);
+			        }
+			        reader.readAsDataURL(input.files[0]);
+			    }
+			}
+			
 			$("#imageIcon").on("click", function(e) {
 				// fileInput을 클릭한 효과를 만들어야 한다.
 				e.preventDefault();
-				$("#fileInput").click();
+				$("#imagePath").click();
 			});
 			
 			
@@ -83,12 +103,25 @@
 					alert("이름을 입력 하세요");
 					return;
 				}
+				
+				var formData = new FormData();
+				formData.append("name", name);
+				formData.append("classification", classification);
+				formData.append("price", price);
+				formData.append("serialNumber", serialNumber);
+				formData.append("etc", etc);
+				formData.append("sharing", sharing);
+				formData.append("imagePath", $("#imagePath")[0].files[0]);
+				
 				alert(sharing.options[sharing.selectedIndex].value);
 				
 				$.ajax({
 					type:"post",
 					url:"/object/registration",
-					data:{"name":name, "classification":classification, "price":price, "serialNumber":serialNumber, "etc":etc},
+					data:formData,
+					enctype:"multipart/form-data", // 파일 업로드 필수 옵션
+					processData:false, 				// 파일 업로드 필수 옵션
+					contentType:false,			
 					success:function(data){
 						if(data.result == "success") {
 							location.href="/object/mylist/view";

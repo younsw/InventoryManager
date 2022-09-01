@@ -42,15 +42,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>아이폰</td>
-							<td>핸드폰</td>
-							<td>1000000</td>
-							<td>2022.8.31</td>
-							<td><button class="btn btn-success">추가</button></td>
-							<td><button class="btn btn-danger">삭제</button></td>
-						</tr>
+						<c:forEach var="object" items="${objectList }">
+							<tr>
+								<td>${object.id }</td>
+								<td>${object.name }</td>
+								<td>${object.classification }</td>
+								<td>${object.price }₩</td>
+								<td>${object.createdAt }</td>
+								<td><button class="btn btn-success">추가</button></td>
+								<td><button class="btn btn-danger">삭제</button></td>
+							</tr>
+						</c:forEach>
 						<tr>
 							<td>1</td>
 							<td>아이폰</td>

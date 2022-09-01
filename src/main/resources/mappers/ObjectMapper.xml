@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.younsw.InventoryManager.object.dao.ObjectDAO">
+
+	<insert id="objectInsert">
+	
+		INSERT INTO 
+			`object`
+		(
+			`userId`
+			, `name`
+			, `imagepath`
+			, `classification`
+			, `serialNumber`
+			, `price`
+			, `etc`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE 
+		(
+			#{userId}
+			, #{name}
+			, #{imagePath}
+			, #{classification}
+			, #{serialNumber}
+			, #{price}
+			, #{etc}
+			, now()
+			, now()
+		)
+		
+	</insert>
+	
+	<select id="objectSelect" parameterType="int" resultType="com.younsw.InventoryManager.object.model.Object">
+	
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `imagepath`
+			, `classification`
+			, `serialNumber`
+			, `price`
+			, `etc`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`object`
+		WHERE
+			`userId` = #{userId}
+	
+	</select>
+ 
+</mapper>
+
