@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.younsw.InventoryManager.common.FileManagerService;
-
 public class FileManagerService {
 	
 public static final String FILE_UPLODE_PATH = "/Users/yeonsang-won/Documents/코딩/uplode/InventoryManager/";

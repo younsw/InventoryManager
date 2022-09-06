@@ -3,6 +3,7 @@
 #wrap {
 	width:1200px;
 	justify-content: center;
+	margin : 0 auto;
 }
 
 .header {
@@ -25,4 +26,21 @@ table {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
+}
+
+.name {
+	font-size: 30px;
+}
+
+.createdAt {
+	font-size: 10px;
+	color: #585858;
+}
+
+.center{
+	margin:0;
+}
+
+.price {
+	font-size: 20px;
 }

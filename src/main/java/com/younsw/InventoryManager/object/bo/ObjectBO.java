@@ -26,5 +26,14 @@ public class ObjectBO {
 		List<Object> Mylist = objectDAO.objectSelect(userId);
 		return Mylist;
 	}
+	
+	public Object objectDetail(int userId, int objectid) {
+		
+		return objectDAO.objectDetail(userId, objectid);
+	}
+	
+	public int deleteObject(int objectId, int userId) {
+		return objectDAO.deleteObject(objectId, userId);
+	}
 
 }

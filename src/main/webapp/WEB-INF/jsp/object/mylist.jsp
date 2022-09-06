@@ -46,23 +46,14 @@
 						<c:forEach var="object" items="${objectList }">
 							<tr>
 								<td>${object.id }</td>
-								<td><a href="#" id="objectDetail">${object.name }</a></td>
+								<td><a href="/object/detail/view?objectid=${object.id }" id="objectDetail">${object.name }</a></td>
 								<td>${object.classification }</td>
 								<td><fmt:formatNumber value="${object.price}" pattern="#,###,###,###,###₩"/></td>
 								<td><fmt:formatDate value="${object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
-								<td><button class="btn btn-success">추가</button></td>
-								<td><button class="btn btn-danger">삭제</button></td>
+								<td><button class="btn btn-success" data-object-id="${object.id }">추가</button></td>
+								<td><button class="btn btn-danger"  data-object-id="${object.id }">삭제</button></td>
 							</tr>
 						</c:forEach>
-						<tr>
-							<td>1</td>
-							<td>아이폰</td>
-							<td>핸드폰</td>
-							<td>1000000</td>
-							<td>2022.8.31</td>
-							<td><button class="btn btn-success">추가</button></td>
-							<td><button class="btn btn-danger">삭제</button></td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -77,11 +68,51 @@
 		
 		$(document).ready(function() {
 			
-			$("#objectDetail").on("click", function() {
-				alert();
+			$(".btn-success").on("click", function() {
+				var objectId = $(this).data("object-id");
+				if (confirm("정말로 추가 하시겠습니까?")) {
+					$.ajax({
+						url:"/object/favorite",
+						type:"post",
+						data:{"objectId":objectId},
+						success:function(data) {
+		            		if(data.result == "success") {
+		            			location.reload();
+		            		} else {
+		            			alert("추가 실패");
+		            		}
+		            	},
+		            	error() {
+		            		alert("추가 에러");
+		            	}
+					});
+				}
+			});
+			 
+			$(".btn-danger").on("click", function() {
+				var objectId = $(this).data("object-id");
+				if (confirm("정말로 삭제 하시겠습니까?")) {
+			            $.ajax({
+			            	url:"/object/delete",
+			            	type:"post",
+			            	data:{"objectId":objectId},
+			            	success:function(data) {
+			            		if(data.result == "success") {
+			            			location.reload();
+			            		} else {
+			            			alert("삭제 실패");
+			            		}
+			            	},
+			            	error() {
+			            		alert("삭제 에러");
+			            	}
+			            });
+			    	}
 			});
 			
 		});
+		
+		
 	
 	</script>
 	

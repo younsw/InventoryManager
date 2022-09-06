@@ -18,5 +18,13 @@ public interface ObjectDAO {
 			, @Param("imagePath") String imagePath);
 	
 	public List<Object> objectSelect(@Param("userId") int userId);
+	
+	public Object objectDetail(
+			@Param("userId") int userId
+			, @Param("objectid") int objectid);
+	
+	public int deleteObject(
+			@Param("objectId") int objectId
+			, @Param("userId") int userId);
 
 }

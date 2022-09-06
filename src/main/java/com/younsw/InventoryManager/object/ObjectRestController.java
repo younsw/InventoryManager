@@ -45,5 +45,27 @@ public class ObjectRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/object/delete")
+	public Map<String, String> deleteObject(
+			@RequestParam("objectId") int objectId
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = objectBO.deleteObject(objectId, userId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "false");
+		}
+		
+		return result;
+	}
+	
 
 }

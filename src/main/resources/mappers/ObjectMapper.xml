@@ -55,6 +55,37 @@
 			`userId` = #{userId}
 	
 	</select>
+	
+	<select id="objectDetail" parameterType="int" resultType="com.younsw.InventoryManager.object.model.Object">
+		
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `imagepath`
+			, `classification`
+			, `serialNumber`
+			, `price`
+			, `etc`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`object`
+		WHERE
+			`userId` = #{userId}
+			AND `id` = #{objectid}
+		
+	</select>
+	
+	<delete id="deleteObject" parameterType="int">
+	
+		DELETE FROM 
+			`object`
+		WHERE 
+			`id` = #{objectId}
+			AND `userId` = #{userId}
+	
+	</delete>
  
 </mapper>
 

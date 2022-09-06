@@ -12,6 +12,7 @@ public class Object {
 	private String serialNumber;
 	private int price;
 	private String sharing;
+	private String etc;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -62,6 +63,12 @@ public class Object {
 	}
 	public void setSharing(String sharing) {
 		this.sharing = sharing;
+	}
+	public String getEtc() {
+		return etc;
+	}
+	public void setEtc(String etc) {
+		this.etc = etc;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
