@@ -86,6 +86,26 @@
 			AND `userId` = #{userId}
 	
 	</delete>
+	
+	<select id="favoriteObject" parameterType="int" resultType="com.younsw.InventoryManager.object.model.Object">
+		
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `imagepath`
+			, `classification`
+			, `serialNumber`
+			, `price`
+			, `etc`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`object`
+		WHERE
+			`id` = #{objectId}
+		
+	</select>
  
 </mapper>
 

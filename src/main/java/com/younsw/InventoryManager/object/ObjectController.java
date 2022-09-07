@@ -53,5 +53,11 @@ public class ObjectController {
 		return "object/detail";
 	}
 	
+	@GetMapping("/object/otherobject/view")
+	public String ohterObject(
+			) {
+		return "object/otherObject";
+	}
+	
 
 }

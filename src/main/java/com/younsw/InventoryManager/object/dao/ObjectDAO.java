@@ -26,5 +26,10 @@ public interface ObjectDAO {
 	public int deleteObject(
 			@Param("objectId") int objectId
 			, @Param("userId") int userId);
+	
+	public Object favoriteObject(
+			@Param("objectId") int objectId);
+	
+	
 
 }
