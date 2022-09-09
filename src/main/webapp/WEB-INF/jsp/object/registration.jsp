@@ -34,7 +34,7 @@
 					<h3>등록</h3>	
 					<input type="text" id="nameInput" class="form-control" placeholder="이름"><br>
 					<input type="text" id="classification" class="form-control" placeholder="분류"><br>
-					<input type="text" id="price" class="form-control" placeholder="가격"><br>
+					<input type="text" id="price" class="form-control" placeholder="가격(원)" onkeyup="commas(this)"><br>
 					<input type="text" id="serialNumber" class="form-control" placeholder="일렬번호(선택)"><br>
 					<input type="text" id="etc" class="form-control" placeholder="기타(선택)"><br>
 					<select name="sharing" id="sharing" class="form-control">
@@ -59,6 +59,38 @@
 	<script>
 		
 		$(document).ready(function() {
+			
+			$(function) commas(t) {
+
+				// 콤마 빼고 
+
+				var x = t.value;			
+
+				x = x.replace(/,/gi, '');
+
+
+
+			        // 숫자 정규식 확인
+
+				var regexp = /^[0-9]*$/;
+
+				if(!regexp.test(x)){ 
+
+					$(t).val(""); 
+
+					alert("숫자만 입력 가능합니다.");
+
+				} else {
+
+					x = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");			
+
+					$(t).val(x);			
+
+				}
+
+			}
+
+
 			
 			$(function() {
 			    $("#imagePath").on('change', function(){
@@ -96,11 +128,11 @@
 					return;
 				}
 				if(classification == "") {
-					alert("이름을 입력 하세요");
+					alert("분류를 입력 하세요");
 					return;
 				}
 				if(price == "") {
-					alert("이름을 입력 하세요");
+					alert("가격을 입력 하세요");
 					return;
 				}
 				
@@ -110,7 +142,7 @@
 				formData.append("price", price);
 				formData.append("serialNumber", serialNumber);
 				formData.append("etc", etc);
-				formData.append("sharing", sharing);
+				formData.append("sharing", sharing.options[sharing.selectedIndex].value);
 				formData.append("imagePath", $("#imagePath")[0].files[0]);
 				
 				alert(sharing.options[sharing.selectedIndex].value);

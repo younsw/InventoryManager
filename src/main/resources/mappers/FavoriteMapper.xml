@@ -40,5 +40,25 @@
 			`userId` = #{userId}
 		
 	</select>
+	
+	<delete id="deleteFavoriteObject" parameterType="int">
+	
+		DELETE FROM
+			`favorite`
+		WHERE 
+			`objectId` = #{objectId}
+	
+	</delete>
+	
+	<select id="isFavoriteObject" parameterType="int" resultType="int">
+		
+		SELECT
+			COUNT(1)
+		FROM 
+			`favorite`
+		WHERE 
+			`objectId` = #{objectId}
+	
+	</select>
  
  </mapper>

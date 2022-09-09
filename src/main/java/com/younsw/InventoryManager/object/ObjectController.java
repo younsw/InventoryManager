@@ -55,7 +55,10 @@ public class ObjectController {
 	
 	@GetMapping("/object/otherobject/view")
 	public String ohterObject(
-			) {
+			Model model) {
+		String sharing = "공개";
+		List<Object> otherObject = objectBO.sharingObject(sharing);
+		model.addAttribute("otherObject", otherObject);
 		return "object/otherObject";
 	}
 	

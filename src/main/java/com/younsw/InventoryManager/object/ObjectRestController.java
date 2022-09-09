@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.younsw.InventoryManager.favorite.bo.FavoriteBO;
 import com.younsw.InventoryManager.object.bo.ObjectBO;
 
 @RestController
@@ -19,6 +20,8 @@ public class ObjectRestController {
 	
 	@Autowired
 	private ObjectBO objectBO;
+	@Autowired
+	private FavoriteBO favoriteBO;
 	
 	@PostMapping("/object/registration")
 	public Map<String, String> objectInsert(
@@ -26,6 +29,7 @@ public class ObjectRestController {
 			, @RequestParam("classification") String classification
 			, @RequestParam(value = "serialNumber", required=false) String serialNumber
 			, @RequestParam("price") int price
+			, @RequestParam("sharing") String sharing
 			, @RequestParam(value="etc", required=false) String etc
 			, @RequestParam("imagePath")MultipartFile imagePath
 			, HttpServletRequest request) {
@@ -33,7 +37,7 @@ public class ObjectRestController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = objectBO.objectInsert(userId, name, classification, serialNumber, price, etc, imagePath);
+		int count = objectBO.objectInsert(userId, name, classification, serialNumber, price, sharing, etc, imagePath);
 		
 		Map<String, String> result = new HashMap<>();
 		
@@ -54,11 +58,12 @@ public class ObjectRestController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = objectBO.deleteObject(objectId, userId);
+		int objectcCount = objectBO.deleteObject(objectId, userId);
+		int favoriteCount = favoriteBO.favoriteObjectDelete(objectId);
 		
 		Map<String, String> result = new HashMap<>();
 		
-		if(count == 1) {
+		if(objectcCount == 1 && favoriteCount == 1) {
 			result.put("result", "success");
 		} else {
 			result.put("result", "false");

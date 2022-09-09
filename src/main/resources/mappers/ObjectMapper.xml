@@ -17,6 +17,7 @@
 			, `classification`
 			, `serialNumber`
 			, `price`
+			, `sharing`
 			, `etc`
 			, `createdAt`
 			, `updatedAt`
@@ -29,6 +30,7 @@
 			, #{classification}
 			, #{serialNumber}
 			, #{price}
+			, #{sharing}
 			, #{etc}
 			, now()
 			, now()
@@ -46,6 +48,7 @@
 			, `classification`
 			, `serialNumber`
 			, `price`
+			, `sharing`
 			, `etc`
 			, `createdAt`
 			, `updatedAt`
@@ -66,6 +69,7 @@
 			, `classification`
 			, `serialNumber`
 			, `price`
+			, `sharing`
 			, `etc`
 			, `createdAt`
 			, `updatedAt`
@@ -97,6 +101,7 @@
 			, `classification`
 			, `serialNumber`
 			, `price`
+			, `sharing`
 			, `etc`
 			, `createdAt`
 			, `updatedAt`
@@ -104,6 +109,28 @@
 			`object`
 		WHERE
 			`id` = #{objectId}
+		
+	</select>
+	
+	<select id="otherObject" parameterType="map" resultType="com.younsw.InventoryManager.object.model.Object">
+		
+		
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `imagepath`
+			, `classification`
+			, `serialNumber`
+			, `price`
+			, `sharing`
+			, `etc`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`object`
+		WHERE
+			`sharing` = #{sharing}
 		
 	</select>
  

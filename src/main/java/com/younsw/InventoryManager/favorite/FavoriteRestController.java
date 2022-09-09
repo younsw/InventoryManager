@@ -17,9 +17,9 @@ import com.younsw.InventoryManager.favorite.bo.FavoriteBO;
 public class FavoriteRestController {
 	
 	@Autowired
-	private FavoriteBO favortieBO;
+	private FavoriteBO favoriteBO;
 	
-	@PostMapping("/object/favorite")
+	@PostMapping("/object/favoriteinsert")
 	public Map<String, String> favoriteObject(
 			@RequestParam("objectId") int objectId
 			, HttpServletRequest request) {
@@ -27,7 +27,7 @@ public class FavoriteRestController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = favortieBO.favoriteObject(userId, objectId);
+		int count = favoriteBO.favoriteObject(userId, objectId);
 		
 		Map<String, String> result = new HashMap<>();
 		
@@ -38,6 +38,23 @@ public class FavoriteRestController {
 		}
 		
 		return result;
+	}
+	
+	@PostMapping("/object/favoritedelete") 
+	public Map<String, String> favoriteDelete(
+			@RequestParam("objectId") int objectId) {
+		int count = favoriteBO.favoriteObjectDelete(objectId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "false");
+		}
+		
+		return result;
+		
 	}
 
 }

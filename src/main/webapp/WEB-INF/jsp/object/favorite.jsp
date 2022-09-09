@@ -30,6 +30,7 @@
 					<h3>즐겨 찾기</h3>
 				</div>
 					
+				<c:if test="${not empty favorite }">
 				<table class="table col-12">
 					<thead>
 						<tr>
@@ -43,10 +44,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="favorite" items="${favorite }">
+						<c:forEach var="favorite" items="${favorite }" varStatus="status">
 							<tr>
-								<td>${favorite.id }</td>
-								<td><a href="/object/detail/view?objectid=${favorite.id }" id="objectDetail">${favorite.name }</a></td>
+								<td>${status.count }</td>
+								<td><a href="#" id="objectDetail">${favorite.name }</a></td>
 								<td>${favorite.classification }</td>
 								<td><fmt:formatNumber value="${favorite.price}" pattern="#,###,###,###,###₩"/></td>
 								<td><fmt:formatDate value="${favorite.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
@@ -56,6 +57,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				</c:if>
 			</div>
 			
 			

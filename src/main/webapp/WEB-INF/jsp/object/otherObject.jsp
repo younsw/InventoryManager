@@ -39,19 +39,17 @@
 							<th>가격(₩)</th>
 							<th>등록 날짜</th>
 							<th>즐겨찾기</th>
-							<th>삭제</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="object" items="${objectList }">
+						<c:forEach var="otherObject" items="${otherObject }">
 							<tr>
-								<td>${object.id }</td>
-								<td><a href="/object/detail/view?objectid=${object.id }" id="objectDetail">${object.name }</a></td>
-								<td>${object.classification }</td>
-								<td><fmt:formatNumber value="${object.price}" pattern="#,###,###,###,###₩"/></td>
-								<td><fmt:formatDate value="${object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
-								<td><button class="btn btn-success" data-object-id="${object.id }">추가</button></td>
-								<td><button class="btn btn-danger"  data-object-id="${object.id }">삭제</button></td>
+								<td>${otherObject.id }</td>
+								<td><a href="/object/detail/view?objectid=${otherObject.id }" id="objectDetail">${otherObject.name }</a></td>
+								<td>${otherObject.classification }</td>
+								<td><fmt:formatNumber value="${otherObject.price}" pattern="#,###,###,###,###₩"/></td>
+								<td><fmt:formatDate value="${otherObject.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
+								<td><button class="btn btn-success" data-object-id="${otherObject.id }">추가</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>

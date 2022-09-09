@@ -14,6 +14,7 @@ public interface ObjectDAO {
 			, @Param("classification") String classification
 			, @Param("serialNumber") String serialNumber
 			, @Param("price") int price
+			, @Param("sharing") String sharing
 			, @Param("etc") String etc
 			, @Param("imagePath") String imagePath);
 	
@@ -30,6 +31,8 @@ public interface ObjectDAO {
 	public Object favoriteObject(
 			@Param("objectId") int objectId);
 	
+	public List<Object> otherObject(
+			@Param("sharing") String sharing);
 	
 
 }

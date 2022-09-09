@@ -16,5 +16,11 @@ public interface FavoriteDAO {
 	
 	public List<Favorite> seletFavorite(
 			@Param("userId") int userId);
+	
+	public int deleteFavoriteObject(
+			@Param("objectId") int objectId); 
+	
+	public int isFavoriteObject(
+			@Param("objectId") int objectId);
 
 }

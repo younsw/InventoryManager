@@ -20,15 +20,16 @@ public class ObjectBO {
 	
 	private FavoriteDAO favoriteDAO;
 	
-	public int objectInsert(int userId, String name, String classification, String serialNumber, int price, String etc, MultipartFile imagePath) {
+	public int objectInsert(int userId, String name, String classification, String serialNumber, int price, String sharing, String etc, MultipartFile imagePath) {
 		
 		String image = FileManagerService.saveFile(userId, imagePath);
 		
-		return objectDAO.objectInsert(userId, name, classification, serialNumber, price, etc, image);
+		return objectDAO.objectInsert(userId, name, classification, serialNumber, price, sharing, etc, image);
 	}
 	
 	public List<Object> objectselect(int userId) {
 		List<Object> Mylist = objectDAO.objectSelect(userId);
+		
 		return Mylist;
 	}
 	
@@ -43,6 +44,10 @@ public class ObjectBO {
 	
 	public Object favoriteSelet(int objectId) {
 		return objectDAO.favoriteObject(objectId);
+	}
+	
+	public List<Object> sharingObject(String sharing) {
+		return objectDAO.otherObject(sharing);
 	}
 
 }

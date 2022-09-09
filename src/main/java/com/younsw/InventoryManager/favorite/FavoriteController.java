@@ -33,5 +33,7 @@ public class FavoriteController {
 		
 		return "object/favorite";
 	}
+	
+	
 
 }

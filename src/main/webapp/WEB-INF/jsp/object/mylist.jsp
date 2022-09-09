@@ -72,7 +72,7 @@
 				var objectId = $(this).data("object-id");
 				if (confirm("정말로 추가 하시겠습니까?")) {
 					$.ajax({
-						url:"/object/favorite",
+						url:"/object/favoriteinsert",
 						type:"post",
 						data:{"objectId":objectId},
 						success:function(data) {
