@@ -40,19 +40,17 @@
 							<th>가격(₩)</th>
 							<th>등록 날짜</th>
 							<th>즐겨찾기</th>
-							<th>삭제</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="favorite" items="${favorite }" varStatus="status">
 							<tr>
 								<td>${status.count }</td>
-								<td><a href="#" id="objectDetail">${favorite.name }</a></td>
+								<td><a href="/object/detail/view?objectid=${favorite.id }" id="objectDetail">${favorite.name }</a></td>
 								<td>${favorite.classification }</td>
 								<td><fmt:formatNumber value="${favorite.price}" pattern="#,###,###,###,###₩"/></td>
 								<td><fmt:formatDate value="${favorite.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
 								<td><button class="btn btn-success" data-object-id="${favorite.id }">삭제</button></td>
-								<td><button class="btn btn-danger"  data-object-id="${favorite.id }">삭제</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -27,7 +27,7 @@
 			<div class="col-8">
 			
 				<div>
-					<h3>내 물건</h3>
+					<h3>둘러보기</h3>
 				</div>
 					
 				<table class="table col-12">

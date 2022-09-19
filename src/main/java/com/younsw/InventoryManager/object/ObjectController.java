@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.younsw.InventoryManager.object.bo.ObjectBO;
+import com.younsw.InventoryManager.object.model.Object;
+import com.younsw.InventoryManager.object.model.ObjectDetail;
 
 
 @Controller
@@ -32,7 +34,7 @@ public class ObjectController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		List<Object> Mylist = objectBO.objectselect(userId);
+		List<ObjectDetail> Mylist = objectBO.objectselect(userId);
 		model.addAttribute("objectList", Mylist);
 		
  		

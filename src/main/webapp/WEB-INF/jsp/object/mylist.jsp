@@ -43,15 +43,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="object" items="${objectList }">
+						<c:forEach var="objectDetail" items="${objectList }">
 							<tr>
-								<td>${object.id }</td>
-								<td><a href="/object/detail/view?objectid=${object.id }" id="objectDetail">${object.name }</a></td>
-								<td>${object.classification }</td>
-								<td><fmt:formatNumber value="${object.price}" pattern="#,###,###,###,###₩"/></td>
-								<td><fmt:formatDate value="${object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
-								<td><button class="btn btn-success" data-object-id="${object.id }">추가</button></td>
-								<td><button class="btn btn-danger"  data-object-id="${object.id }">삭제</button></td>
+								<td>${objectDetail.object.id }</td>
+								<td><a href="/object/detail/view?objectid=${objectDetail.object.id }" id="objectDetail">${objectDetail.object.name }</a></td>
+								<td>${objectDetail.object.classification }</td>
+								<td><fmt:formatNumber value="${objectDetail.object.price}" pattern="#,###,###,###,###₩"/></td>
+								<td><fmt:formatDate value="${objectDetail.object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
+								<c:choose>
+									<c:when test="${objectDetail.objectFavoriteregistration == 1 }">
+										<td><button class="btn deleteFavorite" data-object-id="${objectDetail.object.id }">삭제</button></td>
+									</c:when>
+									<c:otherwise>
+										<td><button class="btn insertFavorite" data-object-id="${objectDetail.object.id }">추가</button></td>
+									</c:otherwise>
+								</c:choose>
+								<td><button class="btn btn-danger"  data-object-id="${objectDetail.object.id }">삭제</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>

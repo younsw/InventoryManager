@@ -32,6 +32,14 @@ table {
 	font-size: 30px;
 }
 
+.deleteFavorite {
+	background-color: #00cc00;
+}
+
+.insertFavorite {
+	background-color: #4dff4d;
+}
+
 .createdAt {
 	font-size: 10px;
 	color: #585858;
