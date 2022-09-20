@@ -50,7 +50,7 @@
 								<td>${favorite.classification }</td>
 								<td><fmt:formatNumber value="${favorite.price}" pattern="#,###,###,###,###₩"/></td>
 								<td><fmt:formatDate value="${favorite.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
-								<td><button class="btn btn-success" data-object-id="${favorite.id }">삭제</button></td>
+								<td><button class="btn deleteFavorite" data-object-id="${favorite.id }">삭제</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -64,7 +64,34 @@
 	
 	</div>
 	
-	
+	<script>
+		
+		$(document).ready(function() {
+			
+			$(".deleteFavorite").on("click", function() {
+				var objectId = $(this).data("object-id");
+				if (confirm("정말로 삭제 하시겠습니까?")) {
+					$.ajax({
+						url:"/object/favoritedelete",
+						type:"post",
+						data:{"objectId":objectId},
+						success:function(data) {
+		            		if(data.result == "success") {
+		            			location.reload();
+		            		} else {
+		            			alert("추가 실패");
+		            		}
+		            	},
+		            	error() {
+		            		alert("추가 에러");
+		            	}
+					});
+				}
+			});
+			
+		});
+			
+	</script>
 	
 
 </body>

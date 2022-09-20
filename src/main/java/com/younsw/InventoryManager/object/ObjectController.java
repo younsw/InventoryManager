@@ -34,8 +34,8 @@ public class ObjectController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		List<ObjectDetail> Mylist = objectBO.objectselect(userId);
-		model.addAttribute("objectList", Mylist);
+		List<ObjectDetail> mylist = objectBO.objectselect(userId);
+		model.addAttribute("objectList", mylist);
 		
  		
 		return "object/mylist";
@@ -59,7 +59,7 @@ public class ObjectController {
 	public String ohterObject(
 			Model model) {
 		String sharing = "공개";
-		List<Object> otherObject = objectBO.sharingObject(sharing);
+		List<ObjectDetail> otherObject = objectBO.sharingObject(sharing);
 		model.addAttribute("otherObject", otherObject);
 		return "object/otherObject";
 	}

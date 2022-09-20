@@ -62,8 +62,27 @@ public class ObjectBO {
 		return objectDAO.favoriteObject(objectId);
 	}
 	
-	public List<Object> sharingObject(String sharing) {
-		return objectDAO.otherObject(sharing);
+	public List<ObjectDetail> sharingObject(String sharing) {
+		
+		List<Object> sharingObject = objectDAO.otherObject(sharing);
+		List<ObjectDetail> objectDetailList = new ArrayList<>();
+		// 오프젝트디테일리스트에 물건 정보 추가하기 
+		// 오프젝트 리스트에 즐겨찾기 추가 여부 추가하기
+		for(Object objectDetail : sharingObject) {
+			
+			int objectId = objectDetail.getId();
+			
+			int objectFavoriteregistration = favoriteDAO.isFavoriteObject(objectId);
+			
+			ObjectDetail detail = new ObjectDetail(); 
+			detail.setObject(objectDetail);
+			detail.setObjectFavoriteregistration(objectFavoriteregistration);
+			
+			objectDetailList.add(detail);
+			
+		}
+		return objectDetailList;
+		
 	}
 
 }

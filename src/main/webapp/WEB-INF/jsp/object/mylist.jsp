@@ -75,11 +75,32 @@
 		
 		$(document).ready(function() {
 			
-			$(".btn-success").on("click", function() {
+			$(".insertFavorite").on("click", function() {
 				var objectId = $(this).data("object-id");
 				if (confirm("정말로 추가 하시겠습니까?")) {
 					$.ajax({
 						url:"/object/favoriteinsert",
+						type:"post",
+						data:{"objectId":objectId},
+						success:function(data) {
+		            		if(data.result == "success") {
+		            			location.reload();
+		            		} else {
+		            			alert("추가 실패");
+		            		}
+		            	},
+		            	error() {
+		            		alert("추가 에러");
+		            	}
+					});
+				}
+			});
+			
+			$(".deleteFavorite").on("click", function() {
+				var objectId = $(this).data("object-id");
+				if (confirm("정말로 삭제 하시겠습니까?")) {
+					$.ajax({
+						url:"/object/favoritedelete",
 						type:"post",
 						data:{"objectId":objectId},
 						success:function(data) {

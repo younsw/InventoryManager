@@ -44,12 +44,19 @@
 					<tbody>
 						<c:forEach var="otherObject" items="${otherObject }">
 							<tr>
-								<td>${otherObject.id }</td>
-								<td><a href="/object/detail/view?objectid=${otherObject.id }" id="objectDetail">${otherObject.name }</a></td>
-								<td>${otherObject.classification }</td>
-								<td><fmt:formatNumber value="${otherObject.price}" pattern="#,###,###,###,###₩"/></td>
-								<td><fmt:formatDate value="${otherObject.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
-								<td><button class="btn btn-success" data-object-id="${otherObject.id }">추가</button></td>
+								<td>${otherObject.object.id }</td>
+								<td><a href="/object/detail/view?objectid=${otherObject.object.id }" id="objectDetail">${otherObject.object.name }</a></td>
+								<td>${otherObject.object.classification }</td>
+								<td><fmt:formatNumber value="${otherObject.object.price}" pattern="#,###,###,###,###₩"/></td>
+								<td><fmt:formatDate value="${otherObject.object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
+								<c:choose>
+									<c:when test="${otherObject.objectFavoriteregistration == 1 }">
+										<td><button class="btn deleteFavorite" data-object-id="${otherObject.object.id }">삭제</button></td>
+									</c:when>
+									<c:otherwise>
+										<td><button class="btn insertFavorite" data-object-id="${otherObject.object.id }">추가</button></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -64,6 +71,52 @@
 	
 	<script>
 		
+		$(document).ready(function() {
+			
+			$(".insertFavorite").on("click", function() {
+				var objectId = $(this).data("object-id");
+				if (confirm("정말로 추가 하시겠습니까?")) {
+					$.ajax({
+						url:"/object/favoriteinsert",
+						type:"post",
+						data:{"objectId":objectId},
+						success:function(data) {
+		            		if(data.result == "success") {
+		            			location.reload();
+		            		} else {
+		            			alert("추가 실패");
+		            		}
+		            	},
+		            	error() {
+		            		alert("추가 에러");
+		            	}
+					});
+				}
+			});
+			
+			$(".deleteFavorite").on("click", function() {
+				var objectId = $(this).data("object-id");
+				if (confirm("정말로 삭제 하시겠습니까?")) {
+					$.ajax({
+						url:"/object/favoritedelete",
+						type:"post",
+						data:{"objectId":objectId},
+						success:function(data) {
+		            		if(data.result == "success") {
+		            			location.reload();
+		            		} else {
+		            			alert("추가 실패");
+		            		}
+		            	},
+		            	error() {
+		            		alert("추가 에러");
+		            	}
+					});
+				}
+			});
+			
+		});
+	
 	</script>
 	
 
