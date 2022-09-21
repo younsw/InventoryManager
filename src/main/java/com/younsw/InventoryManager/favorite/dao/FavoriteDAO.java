@@ -21,6 +21,7 @@ public interface FavoriteDAO {
 			@Param("objectId") int objectId); 
 	
 	public int isFavoriteObject(
-			@Param("objectId") int objectId);
+			@Param("objectId") int objectId
+			, @Param("userId") int userId);
 
 }

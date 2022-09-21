@@ -52,3 +52,7 @@ table {
 .price {
 	font-size: 20px;
 }
+
+.objectDetail {
+	height: 600px;
+}

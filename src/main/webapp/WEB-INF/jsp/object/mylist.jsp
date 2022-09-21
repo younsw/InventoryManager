@@ -27,7 +27,7 @@
 			<div class="col-8">
 			
 				<div>
-					<h3>내 물건</h3>
+					<h3>물건</h3>
 				</div>
 					
 				<table class="table col-12">
@@ -43,9 +43,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="objectDetail" items="${objectList }">
+						<c:forEach var="objectDetail" items="${objectList }" varStatus="status">
 							<tr>
-								<td>${objectDetail.object.id }</td>
+								<td>${status.count }</td>
 								<td><a href="/object/detail/view?objectid=${objectDetail.object.id }" id="objectDetail">${objectDetail.object.name }</a></td>
 								<td>${objectDetail.object.classification }</td>
 								<td><fmt:formatNumber value="${objectDetail.object.price}" pattern="#,###,###,###,###₩"/></td>

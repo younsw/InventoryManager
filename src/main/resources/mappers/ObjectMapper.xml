@@ -59,7 +59,7 @@
 	
 	</select>
 	
-	<select id="objectDetail" parameterType="int" resultType="com.younsw.InventoryManager.object.model.Object">
+	<select id="objectDetail" parameterType="map" resultType="com.younsw.InventoryManager.object.model.Object">
 		
 		SELECT 
 			`id`
@@ -76,8 +76,8 @@
 		FROM 
 			`object`
 		WHERE
-			`userId` = #{userId}
-			AND `id` = #{objectid}
+			if(`id` = #{objectId}, if( `userId` = #{userId}, `id` = #{objectId}, `sharing` = #{sharing} ), 'N' )
+			
 		
 	</select>
 	
@@ -132,6 +132,27 @@
 		WHERE
 			`sharing` = #{sharing}
 		
+	</select>
+	
+	<select id="objectSeleteById" parameterType="map" resultType="com.younsw.InventoryManager.object.model.Object">
+	
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `imagepath`
+			, `classification`
+			, `serialNumber`
+			, `price`
+			, `sharing`
+			, `etc`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`object`
+		WHERE 
+			`id` = #{objectId}
+	
 	</select>
  
 </mapper>

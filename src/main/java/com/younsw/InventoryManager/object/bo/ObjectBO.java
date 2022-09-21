@@ -37,7 +37,7 @@ public class ObjectBO {
 			
 			int objectId = objectDetail.getId();
 			
-			int objectFavoriteregistration = favoriteDAO.isFavoriteObject(objectId);
+			int objectFavoriteregistration = favoriteDAO.isFavoriteObject(objectId, userId);
 			
 			ObjectDetail detail = new ObjectDetail(); 
 			detail.setObject(objectDetail);
@@ -49,20 +49,29 @@ public class ObjectBO {
 		return objectDetailList;
 	}
 	
-	public Object objectDetail(int userId, int objectid) {
+	public Object objectDetail(String sharing, int objectId, int userId) {
 		
-		return objectDAO.objectDetail(userId, objectid);
+		return objectDAO.objectDetail(sharing, objectId, userId);
 	}
 	
 	public int deleteObject(int objectId, int userId) {
-		return objectDAO.deleteObject(objectId, userId);
+		
+		Object object = objectDAO.objectSeleteById(objectId);
+		
+		
+		int count = objectDAO.deleteObject(objectId, userId);
+		
+		if(count == 1) {
+			FileManagerService.removeFile(object.getImagepath());
+		}
+		return count;
 	}
 	
 	public Object favoriteSelet(int objectId) {
 		return objectDAO.favoriteObject(objectId);
 	}
 	
-	public List<ObjectDetail> sharingObject(String sharing) {
+	public List<ObjectDetail> sharingObject(String sharing, int userId) {
 		
 		List<Object> sharingObject = objectDAO.otherObject(sharing);
 		List<ObjectDetail> objectDetailList = new ArrayList<>();
@@ -72,7 +81,7 @@ public class ObjectBO {
 			
 			int objectId = objectDetail.getId();
 			
-			int objectFavoriteregistration = favoriteDAO.isFavoriteObject(objectId);
+			int objectFavoriteregistration = favoriteDAO.isFavoriteObject(objectId, userId);
 			
 			ObjectDetail detail = new ObjectDetail(); 
 			detail.setObject(objectDetail);

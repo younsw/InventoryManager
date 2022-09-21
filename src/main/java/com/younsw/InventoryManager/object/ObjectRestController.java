@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.younsw.InventoryManager.favorite.bo.FavoriteBO;
+import com.younsw.InventoryManager.favorite.dao.FavoriteDAO;
 import com.younsw.InventoryManager.object.bo.ObjectBO;
 
 @RestController
@@ -22,6 +23,8 @@ public class ObjectRestController {
 	private ObjectBO objectBO;
 	@Autowired
 	private FavoriteBO favoriteBO;
+	@Autowired
+	private FavoriteDAO favoriteDAO;
 	
 	@PostMapping("/object/registration")
 	public Map<String, String> objectInsert(
@@ -59,14 +62,25 @@ public class ObjectRestController {
 		int userId = (Integer)session.getAttribute("userId");
 		
 		int objectcCount = objectBO.deleteObject(objectId, userId);
-		int favoriteCount = favoriteBO.favoriteObjectDelete(objectId);
+		int favoriteboolean = favoriteDAO.isFavoriteObject(objectId, userId);
+		int favoriteCount;
 		
 		Map<String, String> result = new HashMap<>();
 		
-		if(objectcCount == 1 && favoriteCount == 1) {
-			result.put("result", "success");
+		if(favoriteboolean == 1) {
+			// 삭제할 물건이 즐겨찾기에 포함
+			favoriteCount = favoriteBO.favoriteObjectDelete(objectId);
+			if(objectcCount == 1 && favoriteCount == 1) {
+				result.put("result", "success");
+			} else {
+				result.put("result", "false");
+			}
 		} else {
-			result.put("result", "false");
+			if(objectcCount == 1) {
+				result.put("result", "success");
+			} else {
+				result.put("result", "false");
+			}
 		}
 		
 		return result;

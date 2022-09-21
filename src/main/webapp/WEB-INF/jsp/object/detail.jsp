@@ -25,26 +25,28 @@
 
 		<c:import url="/WEB-INF/jsp/include/loginHeader.jsp" />
 		
-		<section class="">
+		<section class="d-flex objectDetail">
 		
 			
 			<div class="col-7 center align-self-center">
 				<img class="form-control" src="${object.imagepath }">
 			</div>
 			
-			<div class="col-4 center text-center">
+			<div class="col-4  align-self-center ">
 				<p class="name"> ${object.name }</p>
-				<p> 분류 : ${object.classification }</p>
-				<P class="createdAt"> 등록 날짜 : <fmt:formatDate value="${object.createdAt }" pattern="yyyy년 M월 dd일"/></P>
 				<p class="price"><fmt:formatNumber value="${object.price}" pattern="#,###,###,###,###₩"/></p>
+				<p> 분류 : ${object.classification }</p>
 				<c:if test="${not empty object.serialNumber }">
-					<p> 시리얼 번호 : ${object.serialNumber } </p>
+					<p> 모델 번호 : ${object.serialNumber } </p>
 				</c:if>
 				<c:if test="${not empty object.etc }">
 					<p> 설명 : ${object.etc }</p>
 				</c:if>
+				<P class="createdAt"> 등록 날짜 : <fmt:formatDate value="${object.createdAt }" pattern="yyyy년 M월 dd일"/></P>
 				<button class="btn btn-cuccess">즐겨찾기</button><br><br>
-				<button class="btn btn-cuccess">수정</button>
+				<c:if test="${object.userId == userId }">
+					<button class="btn btn-cuccess">수정</button>
+				</c:if>
 			</div>
 	
 			

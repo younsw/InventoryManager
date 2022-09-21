@@ -35,7 +35,7 @@
 					<input type="text" id="nameInput" class="form-control" placeholder="이름"><br>
 					<input type="text" id="classification" class="form-control" placeholder="분류"><br>
 					<input type="text" id="price" class="form-control" placeholder="가격(원)"><br>
-					<input type="text" id="serialNumber" class="form-control" placeholder="일렬번호(선택)"><br>
+					<input type="text" id="serialNumber" class="form-control" placeholder="모델 번호(선택)"><br>
 					<input type="text" id="etc" class="form-control" placeholder="기타(선택)"><br>
 					<select name="sharing" id="sharing" class="form-control">
 					    <option value="비공개">비공개</option>

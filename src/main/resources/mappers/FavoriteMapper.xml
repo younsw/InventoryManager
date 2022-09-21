@@ -57,7 +57,8 @@
 		FROM 
 			`favorite`
 		WHERE 
-			`objectId` = #{objectId}
+			`userId` = #{userId}
+			AND `objectId` = #{objectId}
 	
 	</select>
  

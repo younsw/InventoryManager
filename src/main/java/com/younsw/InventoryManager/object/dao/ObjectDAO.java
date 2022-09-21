@@ -23,8 +23,9 @@ public interface ObjectDAO {
 	public List<Object> objectSelect(@Param("userId") int userId);
 	
 	public Object objectDetail(
-			@Param("userId") int userId
-			, @Param("objectid") int objectid);
+			@Param("sharing") String sharing
+			, @Param("objectId") int objectId
+			, @Param("userId") int userId);
 	
 	public int deleteObject(
 			@Param("objectId") int objectId
@@ -35,6 +36,9 @@ public interface ObjectDAO {
 	
 	public List<Object> otherObject(
 			@Param("sharing") String sharing);
+	
+	public Object objectSeleteById(
+			@Param("objectId") int objectId);
 	
 
 }

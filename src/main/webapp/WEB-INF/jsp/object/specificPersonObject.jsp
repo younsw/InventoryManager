@@ -27,7 +27,7 @@
 			<div class="col-8">
 			
 				<div>
-					<h3>둘러보기</h3>
+					<h3> 물건</h3>
 				</div>
 					
 				<table class="table col-12">
@@ -42,19 +42,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="otherObject" items="${otherObject }" varStatus="status">
+						<c:forEach var="objectDetail" items="${objectList }" varStatus="status">
 							<tr>
 								<td>${status.count }</td>
-								<td><a href="/object/detail/view?objectid=${otherObject.object.id }" id="objectDetail">${otherObject.object.name }</a></td>
-								<td>${otherObject.object.classification }</td>
-								<td><fmt:formatNumber value="${otherObject.object.price}" pattern="#,###,###,###,###₩"/></td>
-								<td><fmt:formatDate value="${otherObject.object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
+								<td><a href="/object/detail/view?objectid=${objectDetail.object.id }" id="objectDetail">${objectDetail.object.name }</a></td>
+								<td>${objectDetail.object.classification }</td>
+								<td><fmt:formatNumber value="${objectDetail.object.price}" pattern="#,###,###,###,###₩"/></td>
+								<td><fmt:formatDate value="${objectDetail.object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
 								<c:choose>
-									<c:when test="${otherObject.objectFavoriteregistration == 1 }">
-										<td><button class="btn deleteFavorite" data-object-id="${otherObject.object.id }">삭제</button></td>
+									<c:when test="${objectDetail.objectFavoriteregistration == 1 }">
+										<td><button class="btn deleteFavorite" data-object-id="${objectDetail.object.id }">삭제</button></td>
 									</c:when>
 									<c:otherwise>
-										<td><button class="btn insertFavorite" data-object-id="${otherObject.object.id }">추가</button></td>
+										<td><button class="btn insertFavorite" data-object-id="${objectDetail.object.id }">추가</button></td>
 									</c:otherwise>
 								</c:choose>
 							</tr>
@@ -116,6 +116,8 @@
 			});
 			
 		});
+		
+		
 	
 	</script>
 	

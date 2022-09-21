@@ -43,13 +43,15 @@ public class ObjectController {
 	
 	@GetMapping("/object/detail/view")
 	public String detailObject(
-			@RequestParam("objectid") int objectid
-			, HttpServletRequest request
-			, Model model) {
+			@RequestParam("objectid") int objectId
+			, Model model
+			, HttpServletRequest request) {
+		String sharing = "공개";
+		
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		Object object = objectBO.objectDetail(userId, objectid);
+		Object object = objectBO.objectDetail(sharing, objectId, userId);
 		model.addAttribute("object", object);
 		
 		return "object/detail";
@@ -57,9 +59,14 @@ public class ObjectController {
 	
 	@GetMapping("/object/otherobject/view")
 	public String ohterObject(
-			Model model) {
+			Model model
+			, HttpServletRequest request) {
 		String sharing = "공개";
-		List<ObjectDetail> otherObject = objectBO.sharingObject(sharing);
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<ObjectDetail> otherObject = objectBO.sharingObject(sharing, userId);
 		model.addAttribute("otherObject", otherObject);
 		return "object/otherObject";
 	}
