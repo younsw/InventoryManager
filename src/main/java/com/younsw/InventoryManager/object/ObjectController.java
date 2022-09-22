@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.younsw.InventoryManager.object.bo.ObjectBO;
-import com.younsw.InventoryManager.object.model.Object;
 import com.younsw.InventoryManager.object.model.ObjectDetail;
+import com.younsw.InventoryManager.user.dao.UserDAO;
+import com.younsw.InventoryManager.user.model.User;
 
 
 @Controller
@@ -21,10 +22,25 @@ public class ObjectController {
 	
 	@Autowired
 	private ObjectBO objectBO;
+	@Autowired
+	private UserDAO userDAO;
 	
 	@GetMapping("/object/registration/view")
 	public String registration() {
 		return "object/registration";
+	}
+	
+	@GetMapping("/object/specificPersonObject/view")
+	public String spscificPersonObjectList(
+			@RequestParam("userId") int userId
+			, Model model) {
+		String sharing = "공개";
+		
+		List<ObjectDetail> otherList = objectBO.specificPersonObjectList(userId, sharing);
+		model.addAttribute("specificPersonObjctList", otherList);
+		User user = userDAO.seleteUserById(userId);
+		model.addAttribute("user", user);
+		return "object/specificPersonObject";
 	}
 	
 	@GetMapping("/object/mylist/view")
@@ -51,7 +67,7 @@ public class ObjectController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		Object object = objectBO.objectDetail(sharing, objectId, userId);
+		ObjectDetail object = objectBO.objectDetail(sharing, objectId, userId);
 		model.addAttribute("object", object);
 		
 		return "object/detail";

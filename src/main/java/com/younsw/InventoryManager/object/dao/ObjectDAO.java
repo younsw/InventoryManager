@@ -40,5 +40,8 @@ public interface ObjectDAO {
 	public Object objectSeleteById(
 			@Param("objectId") int objectId);
 	
+	public List<Object> specificPersonObjectList(
+			@Param("userId") int userId
+			, @Param("sharing") String sharing);
 
 }

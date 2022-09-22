@@ -36,5 +36,9 @@ public class UserBO {
 		String encryPassword = EncryptUtils.md5(password);
 		return userDAO.signin(loginId, encryPassword);
 	}
+	
+	public User seleteUserById(int userId) {
+		return userDAO.seleteUserById(userId);
+	}
 
 }

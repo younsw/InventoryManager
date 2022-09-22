@@ -25,28 +25,40 @@
 
 		<c:import url="/WEB-INF/jsp/include/loginHeader.jsp" />
 		
-		<section class="d-flex objectDetail">
+		<section class="d-flex objectDetail mx-4">
 		
 			
-			<div class="col-7 center align-self-center">
-				<img class="form-control" src="${object.imagepath }">
+			<div class="col-7 center align-self-center d-flex image">
+				<img class="" height="600" src="${object.object.imagepath }">
 			</div>
 			
 			<div class="col-4  align-self-center ">
-				<p class="name"> ${object.name }</p>
-				<p class="price"><fmt:formatNumber value="${object.price}" pattern="#,###,###,###,###₩"/></p>
-				<p> 분류 : ${object.classification }</p>
-				<c:if test="${not empty object.serialNumber }">
-					<p> 모델 번호 : ${object.serialNumber } </p>
+				<p class="name"> ${object.object.name }</p>
+				<p class="price"><fmt:formatNumber value="${object.object.price}" pattern="#,###,###,###,###₩"/></p>
+				<p> 분류 : ${object.object.classification }</p>
+				<c:if test="${not empty object.object.serialNumber }">
+					<p> 모델 번호 : ${object.object.serialNumber } </p>
 				</c:if>
-				<c:if test="${not empty object.etc }">
-					<p> 설명 : ${object.etc }</p>
+				<c:if test="${not empty object.object.etc }">
+					<p> 설명 : ${object.object.etc }</p>
 				</c:if>
-				<P class="createdAt"> 등록 날짜 : <fmt:formatDate value="${object.createdAt }" pattern="yyyy년 M월 dd일"/></P>
-				<button class="btn btn-cuccess">즐겨찾기</button><br><br>
-				<c:if test="${object.userId == userId }">
+				<p><a href="/object/specificPersonObject/view?userId=${object.user.id }">${object.user.name }</a></p>
+				<P class="createdAt"> 등록 날짜 : <fmt:formatDate value="${object.object.createdAt }" pattern="yyyy년 M월 dd일"/></P>
+				<div>즐겨찾기</div>
+				<c:choose>
+					<c:when test="${object.objectFavoriteregistration == 1 }">
+						<button class="btn deleteFavorite" data-object-id="${object.object.id }">삭제</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btn insertFavorite" data-object-id="${object.object.id }">추가</button>
+					</c:otherwise>
+				</c:choose>
+				<br><br>
+				<c:if test="${object.object.userId == userId }">
 					<button class="btn btn-cuccess">수정</button>
+					<button class="btn btn-danger"  data-object-id="${objectDetail.object.id }">삭제</button>
 				</c:if>
+				
 			</div>
 	
 			
@@ -54,5 +66,77 @@
 			
 	
 	</div>
+	
+	<script>
+		
+	$(document).ready(function() {
+		
+		$(".insertFavorite").on("click", function() {
+			var objectId = $(this).data("object-id");
+			if (confirm("정말로 추가 하시겠습니까?")) {
+				$.ajax({
+					url:"/object/favoriteinsert",
+					type:"post",
+					data:{"objectId":objectId},
+					success:function(data) {
+	            		if(data.result == "success") {
+	            			location.reload();
+	            		} else {
+	            			alert("추가 실패");
+	            		}
+	            	},
+	            	error() {
+	            		alert("추가 에러");
+	            	}
+				});
+			}
+		});
+		
+		$(".deleteFavorite").on("click", function() {
+			var objectId = $(this).data("object-id");
+			if (confirm("정말로 삭제 하시겠습니까?")) {
+				$.ajax({
+					url:"/object/favoritedelete",
+					type:"post",
+					data:{"objectId":objectId},
+					success:function(data) {
+	            		if(data.result == "success") {
+	            			location.reload();
+	            		} else {
+	            			alert("추가 실패");
+	            		}
+	            	},
+	            	error() {
+	            		alert("추가 에러");
+	            	}
+				});
+			}
+		});
+		 
+		$(".btn-danger").on("click", function() {
+			var objectId = $(this).data("object-id");
+			if (confirm("정말로 삭제 하시겠습니까?")) {
+		            $.ajax({
+		            	url:"/object/delete",
+		            	type:"post",
+		            	data:{"objectId":objectId},
+		            	success:function(data) {
+		            		if(data.result == "success") {
+		            			location.reload();
+		            		} else {
+		            			alert("삭제 실패");
+		            		}
+		            	},
+		            	error() {
+		            		alert("삭제 에러");
+		            	}
+		            });
+		    	}
+		});
+		
+	});
+	
+	</script>
+	
 </body>
 </html>

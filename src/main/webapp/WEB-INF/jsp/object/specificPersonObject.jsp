@@ -27,7 +27,7 @@
 			<div class="col-8">
 			
 				<div>
-					<h3> 물건</h3>
+					<h3>${user.name }님의 물건</h3>
 				</div>
 					
 				<table class="table col-12">
@@ -42,7 +42,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="objectDetail" items="${objectList }" varStatus="status">
+						<c:forEach var="objectDetail" items="${specificPersonObjctList }" varStatus="status">
 							<tr>
 								<td>${status.count }</td>
 								<td><a href="/object/detail/view?objectid=${objectDetail.object.id }" id="objectDetail">${objectDetail.object.name }</a></td>

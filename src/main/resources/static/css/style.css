@@ -7,7 +7,7 @@
 }
 
 .header {
-	height:70px;
+	height:110px;
 }
 
 .nav {
@@ -55,4 +55,8 @@ table {
 
 .objectDetail {
 	height: 600px;
+}
+
+.image {
+	justify-content: center;
 }
