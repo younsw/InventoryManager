@@ -57,6 +57,23 @@ table {
 	height: 600px;
 }
 
-.image {
+.image_div {
 	justify-content: center;
+	align-items: center;
+}
+
+.image {
+	height: 600px;
+	width: 600px;
+	object-fit: contain;
+}
+
+.box {
+	background-color: #ea3423;
+	height: 300px;
+	width: 600px;
+}
+
+.search {
+	height: 35px;
 }

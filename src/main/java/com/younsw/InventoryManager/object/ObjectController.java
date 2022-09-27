@@ -30,6 +30,40 @@ public class ObjectController {
 		return "object/registration";
 	}
 	
+	@GetMapping("/object/amend/view") 
+	public String amendObject(
+			@RequestParam("objectid") int objectId
+			, Model model
+			, HttpServletRequest request) {
+		String sharing = "공개";
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		ObjectDetail object = objectBO.objectDetail(sharing, objectId, userId);
+		model.addAttribute("object", object);
+		
+		return "object/amend";
+	}
+	
+	@GetMapping("/object/search/view") 
+	public String searchObject(
+			@RequestParam(value = "search" , required = false) String search
+			, HttpServletRequest request
+			, Model model) {
+		String sharing = "공개";
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		List<ObjectDetail> searchObject = null;
+		if(search != "") {
+			searchObject = objectBO.searchObject(search, sharing, userId);
+		}
+		
+		model.addAttribute("searchObject", searchObject);
+	
+		return "object/search";
+	}
+	
 	@GetMapping("/object/specificPersonObject/view")
 	public String spscificPersonObjectList(
 			@RequestParam("userId") int userId
@@ -86,6 +120,8 @@ public class ObjectController {
 		model.addAttribute("otherObject", otherObject);
 		return "object/otherObject";
 	}
+	
+	
 	
 
 }

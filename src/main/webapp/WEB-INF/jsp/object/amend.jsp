@@ -25,30 +25,30 @@
 		<c:import url="/WEB-INF/jsp/include/loginHeader.jsp" />
 		
 		<section class="d-flex justify-content-center">
-		
-			<div class="col-7  ">
-				<h2 class="text-center">사진 미리보기</h2>
-				<img class="form-control" id="View" src="" />
+			
+			<div class="col-7 d-flex image_div ">
+				<div>
+					<h2 class="text-center">사진</h2>
+					<img class="image" src="${object.object.imagepath }">
+				</div>
 			</div>
+			
 			<div class="col-5 align-self-center ">
 				<div class="text-center">
-					<h3>등록</h3>	
-					<input type="text" id="nameInput" class="form-control" placeholder="이름"><br>
-					<input type="text" id="classification" class="form-control" placeholder="분류"><br>
-					<input type="text" id="price" class="form-control" placeholder="가격(원)"><br>
-					<input type="text" id="serialNumber" class="form-control" placeholder="모델 번호(선택)"><br>
-					<input type="text" id="etc" class="form-control" placeholder="기타(선택)"><br>
+					<h3>수정</h3>	
+					<input type="text" id="nameInput" class="form-control" value="${object.object.name }" placeholder="이름"><br>
+					<input type="text" id="classification" class="form-control" value="${object.object.classification }" placeholder="분류"><br>
+					<input type="number" id="price" class="form-control" value="${object.object.price }" placeholder="가격"><br>
+					<input type="text" id="serialNumber" class="form-control" value="${object.object.serialNumber }" placeholder="일렬 번호"><br>
+					<input type="text" id="etc" class="form-control" value="${object.object.etc }" placeholder="기타"><br>
+					
 					<select name="sharing" id="sharing" class="form-control">
 					    <option value="비공개">비공개</option>
 					    <option value="공개">공개</option>
 					</select>
 					<br>
 					<div class="d-flex justify-content-between">
-						<div class="btn my-1">
-		  					<a href="#" id="imageIcon"> <i class="bi bi-image"></i> </a> 
-							<input type="file" id="imagePath" class="d-none">
-						</div>
-						<button class="btn btn-success form-control" id="objectRegistration">등록</button><br>
+						<button class="btn btn-success form-control" data-object-id="${object.object.id }">수정</button><br>
 					</div>
 				</div>
 			</div>
@@ -62,39 +62,15 @@
 		$(document).ready(function() {
 			
 			
-
-
-			
-			$(function() {
-			    $("#imagePath").on('change', function(){
-			    readURL(this);
-				});
-			});
-			
-			function readURL(input) {
-			    if (input.files && input.files[0]) {
-			        var reader = new FileReader();
-			        reader.onload = function (e) {
-			        $('#View').attr('src', e.target.result);
-			        }
-			        reader.readAsDataURL(input.files[0]);
-			    }
-			}
-			
-			$("#imageIcon").on("click", function(e) {
-				// fileInput을 클릭한 효과를 만들어야 한다.
-				e.preventDefault();
-				$("#imagePath").click();
-			});
-			
-			
-			$("#objectRegistration").on("click", function() {
+			$(".btn-success").on("click", function() {
 				var name = $("#nameInput").val();
 				var classification = $("#classification").val();
 				var price = $("#price").val();
 				var serialNumber = $("#serialNumber").val();
 				var etc = $("#etc").val();
-				var sharing = document.getElementById("sharing");
+				var sharingOption = document.getElementById("sharing")
+				var sharing = sharingOption.options[sharingOption.selectedIndex].value;
+				var objectId = $(this).data("object-id");
 				
 				if(name == "") {
 					alert("이름을 입력 하세요");
@@ -109,31 +85,19 @@
 					return;
 				}
 				
-				var formData = new FormData();
-				formData.append("name", name);
-				formData.append("classification", classification);
-				formData.append("price", price);
-				formData.append("serialNumber", serialNumber);
-				formData.append("etc", etc);
-				formData.append("sharing", sharing.options[sharing.selectedIndex].value);
-				formData.append("imagePath", $("#imagePath")[0].files[0]);
-				
 				$.ajax({
 					type:"post",
-					url:"/object/registration",
-					data:formData,
-					enctype:"multipart/form-data", // 파일 업로드 필수 옵션
-					processData:false, 				// 파일 업로드 필수 옵션
-					contentType:false,			
+					url:"/object/amend",
+					data:{"name":name, "classification":classification, "serialNumber":serialNumber, "price":price, "sharing":sharing, "etc":etc, "objectId":objectId},		// 파일 업로드 필수 옵션
 					success:function(data){
 						if(data.result == "success") {
 							location.href="/object/mylist/view";
 						} else {
-							alert("등록 실패");
+							alert("수정 실패");
 						}
 					},
 					error() {
-						alert("등록 에러")
+						alert("수정 에러")
 					}
 				});
 				

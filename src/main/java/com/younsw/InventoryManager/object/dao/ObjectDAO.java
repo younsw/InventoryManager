@@ -43,5 +43,21 @@ public interface ObjectDAO {
 	public List<Object> specificPersonObjectList(
 			@Param("userId") int userId
 			, @Param("sharing") String sharing);
+	
+	public List<Object> searchObject(
+			@Param("search") String search
+			, @Param("sharing") String sharing
+			, @Param("userId") int userId);
+	
+	public int objectUpdate(
+			@Param("userId") int userId
+			, @Param("name") String name
+			, @Param("classification") String classification
+			, @Param("serialNumber") String serialNumber
+			, @Param("price") int price
+			, @Param("sharing") String sharing
+			, @Param("etc") String etc
+			, @Param("objectId") int objectId);
+	
 
 }

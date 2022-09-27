@@ -86,6 +86,32 @@ public class ObjectRestController {
 		return result;
 	}
 	
+	@PostMapping("/object/amend")
+	public Map<String, String> objectInsert(
+			@RequestParam("name") String name
+			, @RequestParam("classification") String classification
+			, @RequestParam(value = "serialNumber", required=false) String serialNumber
+			, @RequestParam("price") int price
+			, @RequestParam("sharing") String sharing
+			, @RequestParam(value="etc", required=false) String etc
+			, @RequestParam("objectId") int objectId 
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = objectBO.objectUpdate(userId, name, classification, serialNumber, price, sharing, etc, objectId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "false");
+		}
+		
+		return result;
+	}
 	
 
 }

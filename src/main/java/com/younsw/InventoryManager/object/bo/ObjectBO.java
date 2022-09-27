@@ -132,5 +132,31 @@ public class ObjectBO {
 		}
 		return objectDetailList;
 	}
+	
+	public List<ObjectDetail> searchObject(String search, String sharing, int userId) {
+		List<Object> searchObject = objectDAO.searchObject(search, sharing, userId);
+		List<ObjectDetail> objectDetailList = new ArrayList<>();
+		// 오프젝트디테일리스트에 물건 정보 추가하기 
+		// 오프젝트 리스트에 즐겨찾기 추가 여부 추가하기
+		for(Object objectDetail : searchObject) {
+			
+			int objectId = objectDetail.getId();
+			
+			int objectFavoriteregistration = favoriteDAO.isFavoriteObject(objectId, userId);
+			
+			ObjectDetail detail = new ObjectDetail(); 
+			detail.setObject(objectDetail);
+			detail.setObjectFavoriteregistration(objectFavoriteregistration);
+			
+			objectDetailList.add(detail);
+			
+		}
+		return objectDetailList;
+ 	}
+	
+public int objectUpdate(int userId, String name, String classification, String serialNumber, int price, String sharing, String etc, int objectId) {
+		
+		return objectDAO.objectUpdate(userId, name, classification, serialNumber, price, sharing, etc, objectId);
+	}
 
 }

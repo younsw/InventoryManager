@@ -23,46 +23,58 @@
 
 		<c:import url="/WEB-INF/jsp/include/loginHeader.jsp" />
 		
-		<section class="d-flex justify-content-center">
-			<div class="col-8">
+		<section >
 			
-				<div>
-					<h3>둘러보기</h3>
-				</div>
-					
-				<table class="table col-12">
-					<thead>
-						<tr>
-							<th>.No</th>
-							<th>이름</th>
-							<th>분류</th>
-							<th>가격(₩)</th>
-							<th>등록 날짜</th>
-							<th>즐겨찾기</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="otherObject" items="${otherObject }" varStatus="status">
-							<tr>
-								<td>${status.count }</td>
-								<td><a href="/object/detail/view?objectid=${otherObject.object.id }" id="objectDetail">${otherObject.object.name }</a></td>
-								<td>${otherObject.object.classification }</td>
-								<td><fmt:formatNumber value="${otherObject.object.price}" pattern="#,###,###,###,###₩"/></td>
-								<td><fmt:formatDate value="${otherObject.object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
-								<c:choose>
-									<c:when test="${otherObject.objectFavoriteregistration == 1 }">
-										<td><button class="btn deleteFavorite" data-object-id="${otherObject.object.id }">삭제</button></td>
-									</c:when>
-									<c:otherwise>
-										<td><button class="btn insertFavorite" data-object-id="${otherObject.object.id }">추가</button></td>
-									</c:otherwise>
-								</c:choose>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+			<div >
+				<form action="/object/search/view?search" class="search d-flex justify-content-center ">
+					<div class=" col-5 input-group">
+						<input class=" form-control" name="search" type="text">
+						<button class="btn btn-secondary">검색</button>
+					</div>
+				</form>
 			</div>
 			
+			<div class="d-flex justify-content-center">
+			
+				<div class="col-8">
+				
+					<div>
+						<h3>둘러보기</h3>
+					</div>
+						
+					<table class="table col-12">
+						<thead>
+							<tr>
+								<th>.No</th>
+								<th>이름</th>
+								<th>분류</th>
+								<th>가격(₩)</th>
+								<th>등록 날짜</th>
+								<th>즐겨찾기</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="otherObject" items="${otherObject }" varStatus="status">
+								<tr>
+									<td>${status.count }</td>
+									<td><a href="/object/detail/view?objectid=${otherObject.object.id }" id="objectDetail">${otherObject.object.name }</a></td>
+									<td>${otherObject.object.classification }</td>
+									<td><fmt:formatNumber value="${otherObject.object.price}" pattern="#,###,###,###,###₩"/></td>
+									<td><fmt:formatDate value="${otherObject.object.createdAt }" pattern="yyyy년 MM월 dd일"/></td>
+									<c:choose>
+										<c:when test="${otherObject.objectFavoriteregistration == 1 }">
+											<td><button class="btn deleteFavorite" data-object-id="${otherObject.object.id }">삭제</button></td>
+										</c:when>
+										<c:otherwise>
+											<td><button class="btn insertFavorite" data-object-id="${otherObject.object.id }">추가</button></td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
 			
 		</section>
 			

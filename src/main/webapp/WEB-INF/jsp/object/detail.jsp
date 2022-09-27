@@ -28,11 +28,13 @@
 		<section class="d-flex objectDetail mx-4">
 		
 			
-			<div class="col-7 center align-self-center d-flex image">
-				<img class="" height="600" src="${object.object.imagepath }">
+			<div class="col-7 d-flex image_div ">
+				<div class="">
+					<img class="image" src="${object.object.imagepath }">
+				</div>
 			</div>
 			
-			<div class="col-4  align-self-center ">
+			<div class="col-5  align-self-center ">
 				<p class="name"> ${object.object.name }</p>
 				<p class="price"><fmt:formatNumber value="${object.object.price}" pattern="#,###,###,###,###₩"/></p>
 				<p> 분류 : ${object.object.classification }</p>
@@ -55,7 +57,7 @@
 				</c:choose>
 				<br><br>
 				<c:if test="${object.object.userId == userId }">
-					<button class="btn btn-cuccess">수정</button>
+					<a href="/object/amend/view?objectid=${object.object.id }"><button class="btn btn-cuccess">수정</button></a>
 					<button class="btn btn-danger"  data-object-id="${objectDetail.object.id }">삭제</button>
 				</c:if>
 				
