@@ -49,6 +49,7 @@
 					<br>
 					<div class="d-flex justify-content-between">
 						<button class="btn btn-success form-control" data-object-id="${object.object.id }">수정</button><br>
+						<a href="/object/detail/view?objectid=${object.object.id }"><button class="btn btn-secondary form-control">취소</button></a>
 					</div>
 				</div>
 			</div>

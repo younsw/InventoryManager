@@ -107,11 +107,11 @@
 		            		if(data.result == "success") {
 		            			location.reload();
 		            		} else {
-		            			alert("추가 실패");
+		            			alert("삭제 실패");
 		            		}
 		            	},
 		            	error() {
-		            		alert("추가 에러");
+		            		alert("삭제 에러");
 		            	}
 					});
 				}
