@@ -12,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
 	
-public static final String FILE_UPLODE_PATH = "/home/ec2-user/Inventory_Manager";
+public static final String FILE_UPLODE_PATH = "/Users/yeonsang-won/Documents/코딩/uplode/InventoryManager/";
+
+	
 	
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	
