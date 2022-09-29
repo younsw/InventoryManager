@@ -28,15 +28,15 @@
 	
 	<select id="seletFavorite" parameterType="int" resultType="com.younsw.InventoryManager.favorite.model.Favorite">
 		
-		SELECT 
+		SELECT
 			`id`
 			, `userId`
 			, `objectId`
 			, `createdAt`
 			, `updatedAt`
-		FROM 
+		FROM
 			`favorite`
-		WHERE 
+		WHERE
 			`userId` = #{userId}
 		
 	</select>
@@ -45,7 +45,7 @@
 	
 		DELETE FROM
 			`favorite`
-		WHERE 
+		WHERE
 			`objectId` = #{objectId}
 	
 	</delete>
@@ -54,11 +54,11 @@
 		
 		SELECT
 			COUNT(1)
-		FROM 
+		FROM
 			`favorite`
-		WHERE 
+		WHERE
 			`userId` = #{userId}
-			AND `objectId` = #{objectId}
+			
 	
 	</select>
  

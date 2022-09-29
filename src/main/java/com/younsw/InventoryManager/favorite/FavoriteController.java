@@ -28,6 +28,8 @@ public class FavoriteController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
+		String sharing = "공개";
+		
 		List<Object> favoriteList = favoriteBO.seleteFavorite(userId);
 		model.addAttribute("favorite", favoriteList);
 		
