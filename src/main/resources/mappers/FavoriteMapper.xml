@@ -58,7 +58,7 @@
 			`favorite`
 		WHERE
 			`userId` = #{userId}
-			
+			AND `objectId` = #{objectId}
 	
 	</select>
  
