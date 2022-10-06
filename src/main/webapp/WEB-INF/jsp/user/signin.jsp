@@ -24,8 +24,8 @@
 		
 		<section class="d-flex section aligin-item-center ">
 			
-			<div class="col-7">
-				<img src="">
+			<div class="col-7 align-self-center baner">
+				<img height="330" src="/static/image/stock.jpeg">
 			</div>
 			<div class="col-5 signup  align-self-center">
 				<div class="text-center">
